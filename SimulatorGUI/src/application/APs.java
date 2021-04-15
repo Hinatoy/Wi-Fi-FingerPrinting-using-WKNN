@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class APs {
-	public final int numberOfAPs = 5;
 	public List<List<Integer>> locationOfAPs = new ArrayList<List<Integer>>();
 
 	public int randomizeLocation() {
@@ -11,12 +10,15 @@ public class APs {
 	}
 	
 	public void randomizeAPs() {
-		for(int n = 0; n < numberOfAPs; n++) {
+		for(int n = 0; n < Configuration.NUM_WIFIs; n++) {
 			locationOfAPs.add(new ArrayList<Integer>());
 			locationOfAPs.get(n).add(randomizeLocation()); //x
 			locationOfAPs.get(n).add(randomizeLocation()); //y
 		}
-		//print();
+	}
+	
+	public void setAPs(List<List<Integer>> locationOfAPs) {
+		this.locationOfAPs = locationOfAPs;
 	}
 	
 	public List<Integer> locationOfAP (int n) {
@@ -25,7 +27,7 @@ public class APs {
 	
 	public void print() {
 		System.out.println("Locations of APs");
-		for(int i = 0; i < numberOfAPs; i++) {
+		for(int i = 0; i < Configuration.NUM_WIFIs; i++) {
 			for(int j = 0; j < 2; j++) {
 				System.out.printf("%5d", locationOfAPs.get(i).get(j));
 			}
