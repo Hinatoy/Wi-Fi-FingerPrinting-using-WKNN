@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" styleClass="base_pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <AnchorPane prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #002d40;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="759.0" layoutY="9.0" prefHeight="20.0" prefWidth="20.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="12.0">
+               <children>
+                  <ImageView fx:id="exit" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../cross.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <ImageView fx:id="menu" fitHeight="36.0" fitWidth="36.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="759.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../menu1-01-01.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="46.0" prefHeight="454.0" prefWidth="44.0" style="-fx-background-color: White;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="44.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../map1-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../setting-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../save%20as-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="47.0" layoutY="44.0" prefHeight="434.0" prefWidth="637.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <Text layoutX="273.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" AnchorPane.bottomAnchor="387.9765625" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="273.72265625" AnchorPane.topAnchor="14.1015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Separator focusTraversable="false" layoutX="139.0" layoutY="53.0" prefHeight="0.0" prefWidth="354.0" style="-fx-background-color: #6a6a6a;" />
+            <Text layoutX="160.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area measurements (in cm):" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="area_measure" focusTraversable="false" layoutX="342.0" layoutY="59.0" prefHeight="26.0" prefWidth="129.0" promptText="(x, y)" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
+            <Text layoutX="160.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of blocks:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="rows_columns" focusTraversable="false" layoutX="287.0" layoutY="85.0" prefHeight="26.0" prefWidth="129.0" promptText="(rows, columns)" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
+            <Text layoutX="160.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting location of user:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="user_location" focusTraversable="false" layoutX="321.0" layoutY="121.0" promptText="(x, y)" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
+            <Text layoutX="160.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User mobility:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <JFXRadioButton fx:id="user_mobility_yes" disable="true" focusTraversable="false" layoutX="257.0" layoutY="152.0" text="yes" />
+            <JFXRadioButton fx:id="user_mobility_no" focusTraversable="false" layoutX="311.0" layoutY="152.0" selected="true" text="no">
+               <selectedColor>
+                  <Color red="0.6100000143051147" green="0.06335622072219849" blue="0.061000000685453415" />
+               </selectedColor>
+            </JFXRadioButton>
+            <Text layoutX="160.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of APs:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="number_aps" focusTraversable="false" layoutX="267.0" layoutY="183.0" prefHeight="26.0" prefWidth="129.0" promptText="5" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
+            <Text layoutX="160.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locations of APs:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="locations_aps" focusTraversable="false" layoutX="160.0" layoutY="233.0" prefHeight="56.0" prefWidth="324.0" promptText="(x, y), (x, y), ..." style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" stylesheets="@application.css" />
+            <Text layoutX="160.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algorithm:" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <JFXComboBox fx:id="algorithm" focusTraversable="false" layoutX="236.0" layoutY="294.0" prefHeight="25.0" prefWidth="78.0" promptText="WKNN" />
+            <JFXButton fx:id="settings_apply" focusTraversable="false" layoutX="205.0" layoutY="366.0" prefHeight="25.0" prefWidth="78.0" ripplerFill="BLACK" style="-fx-background-color: #e7e7e7;" text="APPLY">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="settings_save" focusTraversable="false" layoutX="293.0" layoutY="366.0" prefHeight="25.0" prefWidth="78.0" ripplerFill="BLACK" style="-fx-background-color: #e7e7e7;" text="SAVE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="settings_load" focusTraversable="false" layoutX="381.0" layoutY="366.0" prefHeight="25.0" prefWidth="78.0" ripplerFill="BLACK" style="-fx-background-color: #e7e7e7;" text="LOAD">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane1" layoutX="10.0" layoutY="56.0" prefHeight="434.0" prefWidth="720.0" style="-fx-background-color: #000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+      <AnchorPane fx:id="pane2" layoutX="10.0" layoutY="10.0" prefHeight="434.0" prefWidth="210.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <VBox prefHeight="434.0" prefWidth="210.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <JFXButton fx:id="map" alignment="BOTTOM_LEFT" focusTraversable="false" prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: white;" text="Map">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="settings" alignment="BOTTOM_LEFT" focusTraversable="false" prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: white;" text="Settings" textFill="#3a3a3a">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="saveAs" alignment="BOTTOM_LEFT" focusTraversable="false" prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: white;" text="Save as..." textFill="#3a3a3a">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="434.0" prefWidth="44.0" style="-fx-background-color: White;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="46.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="44.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../map1-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../setting-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../save%20as-01.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="drag" layoutX="56.0" layoutY="10.0" prefHeight="46.0" prefWidth="619.0" />
+   </children>
+</AnchorPane>
