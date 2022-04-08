@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputFilter.Config;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -18,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -47,6 +50,8 @@ public class Controller implements Initializable {
 	private TextField area_measure, rows_columns, user_location, number_aps;
 	@FXML
 	private TextArea locations_aps;
+	@FXML 
+	private JFXComboBox<String> algorithm;
 	
 	
 	private double x = 0, y = 0;
@@ -127,7 +132,7 @@ public class Controller implements Initializable {
 		
 		settings.setOnMouseClicked(event -> {
 		    try {
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("settings.fxml"));
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource(settingsFXML));
 		        Stage stage = (Stage) settings.getScene().getWindow();
 		        Scene scene = new Scene(loader.load());
 		        stage.setScene(scene);
@@ -139,7 +144,7 @@ public class Controller implements Initializable {
 		
 		map.setOnMouseClicked(event -> {
 		    try {
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("map.fxml"));
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource(mapFXML));
 		        Stage stage = (Stage) settings.getScene().getWindow();
 		        Scene scene = new Scene(loader.load());
 		        stage.setScene(scene);
@@ -161,6 +166,9 @@ public class Controller implements Initializable {
 		}
 		
 		if(arg0.getFile().substring(arg0.getFile().length() - 13).equals(settingsFXML)) {
+			algorithm.getItems().add("WKNN");
+			algorithm.getItems().add("KNN");
+			
 			settings_apply.setOnAction(event -> {
 				applySettings();
 			});
@@ -168,6 +176,7 @@ public class Controller implements Initializable {
 			settings_save.setOnAction(event -> {
 				saveSettings();
 			});
+			
 		}
 	}
 	
@@ -305,25 +314,33 @@ public class Controller implements Initializable {
 		// if the user's map is not square but rectangular, the beginning point on the map may be different for the map to still be centered
 		double startingX = 0;
 		double startingY = 0;
+		double height = 0, width = 0;
 		double ratio = 1;
 		if(Configuration.MAP_WIDTH_IN_CM > Configuration.MAP_HEIGHT_IN_CM) {
 			ratio = Configuration.MAP_HEIGHT_IN_CM / Configuration.MAP_WIDTH_IN_CM;
 			startingY = (Configuration.GUI_MAP_HEIGHT - Configuration.GUI_MAP_HEIGHT * ratio) / 2;
 			
+			height = Configuration.GUI_MAP_HEIGHT * ratio / Configuration.MAP_NUM_ROWS - 2 * border;
+			width = Configuration.GUI_MAP_WIDTH / Configuration.MAP_NUM_COLS - 2 * border;
 		} else if(Configuration.MAP_WIDTH_IN_CM < Configuration.MAP_HEIGHT_IN_CM) {
 			ratio = Configuration.MAP_WIDTH_IN_CM / Configuration.MAP_HEIGHT_IN_CM;
 			startingX = (Configuration.GUI_MAP_WIDTH - Configuration.GUI_MAP_WIDTH * ratio) / 2;
 			
+			height = Configuration.GUI_MAP_HEIGHT / Configuration.MAP_NUM_ROWS - 2 * border;
+			width = Configuration.GUI_MAP_WIDTH * ratio / Configuration.MAP_NUM_COLS - 2 * border;
+		} else {
+			height = Configuration.GUI_MAP_HEIGHT / Configuration.MAP_NUM_ROWS - 2 * border;
+			width = Configuration.GUI_MAP_WIDTH / Configuration.MAP_NUM_COLS - 2 * border;
 		}
 		
+		System.out.println("Starting X: " + startingX + " Starting Y: " + startingY);
 		
-		
-		double position_x = startingX + Configuration.GUI_MAP_WIDTH / Configuration.MAP_WIDTH_IN_CM * currentLocation.get(0);
-		double position_y = startingY + Configuration.GUI_MAP_HEIGHT / Configuration.MAP_HEIGHT_IN_CM * currentLocation.get(1);
+		double position_x = startingX + (Configuration.GUI_MAP_WIDTH - startingX*2) / Configuration.MAP_WIDTH_IN_CM * currentLocation.get(0);
+		double position_y = startingY + (Configuration.GUI_MAP_HEIGHT - startingY*2) / Configuration.MAP_HEIGHT_IN_CM * currentLocation.get(1);
 		System.out.println("Current location on map: " + position_x + " " + position_y);
-		double width = 32;
+		double logoWidth = 32;
 		
-		context.drawImage(pin1, position_x - width/2 - border, position_y - width - border, width, width);
+		context.drawImage(pin1, position_x - logoWidth/2, position_y - logoWidth, logoWidth, logoWidth);
 	}
 	
 	public void drawEstimatedLocation(GraphicsContext context, List<Double> estimatedLocation) {
@@ -344,8 +361,8 @@ public class Controller implements Initializable {
 		}
 		
 		
-		double position_x = startingX + estimatedLocation.get(0) * Configuration.GUI_MAP_WIDTH / Configuration.MAP_WIDTH_IN_CM;
-		double position_y = startingY + estimatedLocation.get(1) * Configuration.GUI_MAP_HEIGHT / Configuration.MAP_HEIGHT_IN_CM;
+		double position_x = startingX + estimatedLocation.get(0) * (Configuration.GUI_MAP_WIDTH - startingX*2) / Configuration.MAP_WIDTH_IN_CM;
+		double position_y = startingY + estimatedLocation.get(1) * (Configuration.GUI_MAP_HEIGHT - startingY*2) / Configuration.MAP_HEIGHT_IN_CM;
 		System.out.println("Estimated location on map: " + position_x + " " + position_y);
 		double width = 32;
 		
@@ -421,8 +438,8 @@ public class Controller implements Initializable {
 		
 		for(int i = 0; i < locationOfAPs.size(); i++) {
 			//System.out.println("AP Location:" + locationOfAPs.get(i).get(0) + " " + locationOfAPs.get(i).get(1));
-			double position_x = startingX + locationOfAPs.get(i).get(0) * Configuration.GUI_MAP_WIDTH / Configuration.MAP_WIDTH_IN_CM;
-			double position_y = startingY + locationOfAPs.get(i).get(1) * Configuration.GUI_MAP_HEIGHT / Configuration.MAP_HEIGHT_IN_CM;
+			double position_x = startingX + locationOfAPs.get(i).get(0) * (Configuration.GUI_MAP_WIDTH - startingX*2) / Configuration.MAP_WIDTH_IN_CM;
+			double position_y = startingY + locationOfAPs.get(i).get(1) * (Configuration.GUI_MAP_HEIGHT - startingY*2) / Configuration.MAP_HEIGHT_IN_CM;
 				
 			double width = 16;
 			context.drawImage(wifi, position_x - width/2 - border, position_y - width/2 - border, width, width);
@@ -488,6 +505,16 @@ public class Controller implements Initializable {
 		
 		if(!locations_aps.getText().trim().isEmpty()) {
 			
+		}
+		
+		if(!algorithm.getSelectionModel().isEmpty()) {
+			if(algorithm.getValue().equals("WKNN")) {
+				Configuration.W_ON = true;
+				System.out.println("WKNN");
+			} else if (algorithm.getValue().equals("KNN")) {
+				Configuration.W_ON = false;
+				System.out.println("KNN");
+			}
 		}
 	}
 	
