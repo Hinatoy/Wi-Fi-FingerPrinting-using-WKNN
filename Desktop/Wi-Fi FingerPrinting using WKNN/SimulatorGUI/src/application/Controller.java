@@ -160,7 +160,7 @@ public class Controller implements Initializable {
 			});
 		}
 		
-		if(arg0.getFile().substring(arg0.getFile().length() - 12).equals(settingsFXML)) {
+		if(arg0.getFile().substring(arg0.getFile().length() - 13).equals(settingsFXML)) {
 			settings_apply.setOnAction(event -> {
 				applySettings();
 			});
@@ -467,12 +467,13 @@ public class Controller implements Initializable {
 			String[] areaMeasure = area_measure.getText().split(",");
 			Configuration.MAP_WIDTH_IN_CM = Double.parseDouble(areaMeasure[0].substring(1));
 			Configuration.MAP_HEIGHT_IN_CM = Double.parseDouble(areaMeasure[1].substring(1, areaMeasure[1].length() - 1));
+			System.out.println(Configuration.MAP_WIDTH_IN_CM + " " + Configuration.MAP_HEIGHT_IN_CM);
 		}
 		
 		if(!rows_columns.getText().trim().isEmpty()) {
 			String[] rowsColumns = rows_columns.getText().split(",");
-			Configuration.MAP_NUM_ROWS = Integer.parseInt(rowsColumns[0].substring(1));
-			Configuration.MAP_NUM_COLS = Integer.parseInt(rowsColumns[1].substring(1, rowsColumns[1].length() - 1));
+			Configuration.MAP_NUM_COLS = Integer.parseInt(rowsColumns[0].substring(1));
+			Configuration.MAP_NUM_ROWS = Integer.parseInt(rowsColumns[1].substring(1, rowsColumns[1].length() - 1));
 		}
 		
 		if(!user_location.getText().trim().isEmpty()) {
