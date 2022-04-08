@@ -89,7 +89,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="rows_columns" focusTraversable="false" layoutX="287.0" layoutY="85.0" prefHeight="26.0" prefWidth="129.0" promptText="(columns,  rows)" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
+            <TextField fx:id="rows_columns" focusTraversable="false" layoutX="287.0" layoutY="85.0" prefHeight="26.0" prefWidth="129.0" promptText="(columns, rows)" style="-fx-border-width: 0 0 1 0; -fx-border-color: black; -fx-background-color: transparent;" />
             <Text layoutX="160.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting location of user:" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
